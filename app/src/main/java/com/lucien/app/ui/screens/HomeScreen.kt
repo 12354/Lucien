@@ -35,6 +35,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import com.lucien.app.update.UpdateManager
+import com.lucien.app.update.UpdateResult
 import com.lucien.app.update.UpdateState
 import kotlinx.coroutines.launch
 
@@ -45,15 +46,18 @@ fun HomeScreen() {
     val scope = rememberCoroutineScope()
     var updateState by remember { mutableStateOf<UpdateState>(UpdateState.Idle) }
 
-    LaunchedEffect(Unit) {
+    suspend fun doCheck() {
         updateState = UpdateState.Checking
-        val info = updateManager.checkForUpdate()
-        updateState = when {
-            info == null -> UpdateState.Error("Could not check for updates")
-            info.hasUpdate -> UpdateState.Available(info)
-            else -> UpdateState.UpToDate
+        updateState = when (val result = updateManager.checkForUpdate()) {
+            is UpdateResult.Success -> {
+                if (result.info.hasUpdate) UpdateState.Available(result.info)
+                else UpdateState.UpToDate
+            }
+            is UpdateResult.Failure -> UpdateState.Error(result.error)
         }
     }
+
+    LaunchedEffect(Unit) { doCheck() }
 
     Column(
         modifier = Modifier
@@ -100,15 +104,7 @@ fun HomeScreen() {
                 }
             },
             onRetry = {
-                scope.launch {
-                    updateState = UpdateState.Checking
-                    val info = updateManager.checkForUpdate()
-                    updateState = when {
-                        info == null -> UpdateState.Error("Could not check for updates")
-                        info.hasUpdate -> UpdateState.Available(info)
-                        else -> UpdateState.UpToDate
-                    }
-                }
+                scope.launch { doCheck() }
             }
         )
     }
