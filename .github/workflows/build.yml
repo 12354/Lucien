@@ -23,35 +23,38 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
-          cache: gradle
+
+      - name: Cache Gradle wrapper and dependencies
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+            ~/.gradle/daemon
+          key: gradle-${{ runner.os }}-${{ hashFiles('**/*.gradle.kts', 'gradle/wrapper/gradle-wrapper.properties') }}
+          restore-keys: |
+            gradle-${{ runner.os }}-
 
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
       - name: Build debug APK
-        run: ./gradlew assembleDebug --no-daemon
+        run: ./gradlew assembleDebug --build-cache
 
       - name: Verify APK
         run: |
           APK=app/build/outputs/apk/debug/app-debug.apk
           echo "=== APK info ==="
           ls -la "$APK"
-          echo ""
           echo "=== File type ==="
           file "$APK"
-          echo ""
           echo "=== APK signature verification ==="
           "$ANDROID_HOME/build-tools/$(ls $ANDROID_HOME/build-tools/ | tail -1)/apksigner" verify --verbose "$APK"
-          echo ""
-          echo "=== APK manifest dump ==="
-          "$ANDROID_HOME/build-tools/$(ls $ANDROID_HOME/build-tools/ | tail -1)/aapt2" dump badging "$APK" | head -5
-          echo ""
           echo "=== SHA256 ==="
           sha256sum "$APK"
 
       - name: Rename APK
-        run: |
-          cp app/build/outputs/apk/debug/app-debug.apk app/build/outputs/apk/debug/lucien-debug.apk
+        run: cp app/build/outputs/apk/debug/app-debug.apk app/build/outputs/apk/debug/lucien-debug.apk
 
       - name: Upload APK as artifact
         uses: actions/upload-artifact@v4
@@ -61,23 +64,20 @@ jobs:
           compression-level: 0
           retention-days: 30
 
-      - name: Create or update rolling release
-        uses: softprops/action-gh-release@v2
-        with:
-          tag_name: latest-debug
-          name: Latest Debug Build
-          body: |
-            Automatically built debug APK from the latest push.
-
-            **Download the APK directly** - no need to extract from a ZIP.
-
-            Commit: ${{ github.sha }}
-            Branch: ${{ github.ref_name }}
-          files: app/build/outputs/apk/debug/lucien-debug.apk
-          prerelease: true
-          make_latest: false
+      - name: Delete old release
+        run: gh release delete latest-debug --yes --cleanup-tag || true
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Create release with APK
+        run: |
+          gh release create latest-debug \
+            app/build/outputs/apk/debug/lucien-debug.apk \
+            --title "Latest Debug Build" \
+            --notes "Debug APK from commit ${{ github.sha }} on branch ${{ github.ref_name }}." \
+            --prerelease
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   build-release:
     name: Build Release APK
@@ -95,17 +95,26 @@ jobs:
         with:
           java-version: '17'
           distribution: 'temurin'
-          cache: gradle
+
+      - name: Cache Gradle wrapper and dependencies
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.gradle/caches
+            ~/.gradle/wrapper
+            ~/.gradle/daemon
+          key: gradle-${{ runner.os }}-${{ hashFiles('**/*.gradle.kts', 'gradle/wrapper/gradle-wrapper.properties') }}
+          restore-keys: |
+            gradle-${{ runner.os }}-
 
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
       - name: Build release APK
-        run: ./gradlew assembleRelease --no-daemon
+        run: ./gradlew assembleRelease --build-cache
 
       - name: Rename APK
-        run: |
-          cp app/build/outputs/apk/release/app-release-unsigned.apk app/build/outputs/apk/release/lucien-release.apk
+        run: cp app/build/outputs/apk/release/app-release-unsigned.apk app/build/outputs/apk/release/lucien-release.apk
 
       - name: Upload release APK
         uses: actions/upload-artifact@v4
