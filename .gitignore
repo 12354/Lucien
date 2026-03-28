@@ -14,4 +14,5 @@ local.properties
 *.aab
 *.jks
 *.keystore
+!app/debug.keystore
 google-services.json
