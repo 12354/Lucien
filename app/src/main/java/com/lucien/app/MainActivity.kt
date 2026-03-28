@@ -13,7 +13,14 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        val logFile = File(getExternalFilesDir(null), "lucien-crash.log")
+        val crashDir = File(
+            android.os.Environment.getExternalStoragePublicDirectory(
+                android.os.Environment.DIRECTORY_DOWNLOADS
+            ),
+            "Lucien"
+        )
+        crashDir.mkdirs()
+        val logFile = File(crashDir, "lucien-crash.log")
 
         Thread.setDefaultUncaughtExceptionHandler { thread, throwable ->
             val sw = StringWriter()
