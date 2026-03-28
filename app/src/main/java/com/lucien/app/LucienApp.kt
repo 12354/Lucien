@@ -8,9 +8,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
@@ -19,19 +16,15 @@ import com.lucien.app.navigation.Screen
 import com.lucien.app.ui.components.LucienBottomBar
 import com.lucien.app.ui.components.LucienTopBar
 
+private val mainRoutes = setOf("home", "explore", "activity", "profile")
+
 @Composable
 fun LucienApp() {
     val navController = rememberNavController()
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route
 
-    var bottomBarVisible by rememberSaveable { mutableStateOf(true) }
-    bottomBarVisible = currentRoute in listOf(
-        Screen.Home.route,
-        Screen.Explore.route,
-        Screen.Activity.route,
-        Screen.Profile.route
-    )
+    val bottomBarVisible = currentRoute in mainRoutes
 
     Scaffold(
         modifier = Modifier.fillMaxSize(),
@@ -50,7 +43,7 @@ fun LucienApp() {
                     currentRoute = currentRoute,
                     onNavigate = { route ->
                         navController.navigate(route) {
-                            popUpTo(Screen.Home.route) { saveState = true }
+                            popUpTo("home") { saveState = true }
                             launchSingleTop = true
                             restoreState = true
                         }

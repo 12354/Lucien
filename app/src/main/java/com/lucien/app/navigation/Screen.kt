@@ -14,38 +14,36 @@ import androidx.compose.ui.graphics.vector.ImageVector
 sealed class Screen(
     val route: String,
     val label: String,
-    val selectedIcon: ImageVector? = null,
-    val unselectedIcon: ImageVector? = null
+    val selectedIcon: ImageVector,
+    val unselectedIcon: ImageVector
 ) {
-    data object Home : Screen(
+    object Home : Screen(
         route = "home",
         label = "Home",
         selectedIcon = Icons.Filled.Home,
         unselectedIcon = Icons.Outlined.Home
     )
 
-    data object Explore : Screen(
+    object Explore : Screen(
         route = "explore",
         label = "Explore",
         selectedIcon = Icons.Filled.Explore,
         unselectedIcon = Icons.Outlined.Explore
     )
 
-    data object Activity : Screen(
+    object Activity : Screen(
         route = "activity",
         label = "Activity",
         selectedIcon = Icons.Filled.Notifications,
         unselectedIcon = Icons.Outlined.Notifications
     )
 
-    data object Profile : Screen(
+    object Profile : Screen(
         route = "profile",
         label = "Profile",
         selectedIcon = Icons.Filled.Person,
         unselectedIcon = Icons.Outlined.Person
     )
-
-    companion object {
-        val bottomNavItems = listOf(Home, Explore, Activity, Profile)
-    }
 }
+
+val bottomNavItems = listOf(Screen.Home, Screen.Explore, Screen.Activity, Screen.Profile)

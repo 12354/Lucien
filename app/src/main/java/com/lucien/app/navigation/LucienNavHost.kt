@@ -21,7 +21,7 @@ fun LucienNavHost(
 ) {
     NavHost(
         navController = navController,
-        startDestination = Screen.Home.route,
+        startDestination = "home",
         modifier = modifier,
         enterTransition = {
             fadeIn(animationSpec = tween(200)) + slideIntoContainer(
@@ -42,16 +42,16 @@ fun LucienNavHost(
             )
         }
     ) {
-        composable(Screen.Home.route) {
+        composable("home") {
             HomeScreen()
         }
-        composable(Screen.Explore.route) {
+        composable("explore") {
             ExploreScreen()
         }
-        composable(Screen.Activity.route) {
+        composable("activity") {
             ActivityScreen()
         }
-        composable(Screen.Profile.route) {
+        composable("profile") {
             ProfileScreen()
         }
     }

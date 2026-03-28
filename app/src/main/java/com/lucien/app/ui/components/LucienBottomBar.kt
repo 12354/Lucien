@@ -8,7 +8,7 @@ import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.unit.dp
-import com.lucien.app.navigation.Screen
+import com.lucien.app.navigation.bottomNavItems
 
 @Composable
 fun LucienBottomBar(
@@ -19,14 +19,14 @@ fun LucienBottomBar(
         containerColor = MaterialTheme.colorScheme.surface,
         tonalElevation = 0.dp
     ) {
-        Screen.bottomNavItems.forEach { screen ->
+        bottomNavItems.forEach { screen ->
             val selected = currentRoute == screen.route
             NavigationBarItem(
                 selected = selected,
                 onClick = { onNavigate(screen.route) },
                 icon = {
                     Icon(
-                        imageVector = if (selected) screen.selectedIcon!! else screen.unselectedIcon!!,
+                        imageVector = if (selected) screen.selectedIcon else screen.unselectedIcon,
                         contentDescription = screen.label
                     )
                 },
