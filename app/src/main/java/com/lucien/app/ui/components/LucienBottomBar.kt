@@ -7,6 +7,7 @@ import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.unit.dp
 import com.lucien.app.navigation.Screen
 
 @Composable
@@ -16,7 +17,7 @@ fun LucienBottomBar(
 ) {
     NavigationBar(
         containerColor = MaterialTheme.colorScheme.surface,
-        tonalElevation = androidx.compose.ui.unit.dp.times(0)
+        tonalElevation = 0.dp
     ) {
         Screen.bottomNavItems.forEach { screen ->
             val selected = currentRoute == screen.route
