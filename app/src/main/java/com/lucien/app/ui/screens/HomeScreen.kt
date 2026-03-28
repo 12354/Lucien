@@ -152,7 +152,7 @@ private fun QuickActionCard(action: QuickAction) {
             .width(140.dp)
             .animateContentSize(),
         colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surfaceContainerHigh
+            containerColor = MaterialTheme.colorScheme.surfaceVariant
         ),
         shape = MaterialTheme.shapes.medium
     ) {
@@ -196,7 +196,7 @@ private fun InsightCardItem(insight: InsightCard) {
             .fillMaxWidth()
             .padding(horizontal = 20.dp),
         colors = CardDefaults.cardColors(
-            containerColor = MaterialTheme.colorScheme.surfaceContainer
+            containerColor = MaterialTheme.colorScheme.surfaceVariant
         ),
         shape = MaterialTheme.shapes.large
     ) {

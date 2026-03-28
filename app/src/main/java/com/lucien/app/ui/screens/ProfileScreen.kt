@@ -11,11 +11,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.outlined.HelpOutline
 import androidx.compose.material.icons.outlined.ChevronRight
 import androidx.compose.material.icons.outlined.ColorLens
+import androidx.compose.material.icons.outlined.HelpOutline
 import androidx.compose.material.icons.outlined.Info
 import androidx.compose.material.icons.outlined.Language
 import androidx.compose.material.icons.outlined.Notifications
@@ -24,7 +23,7 @@ import androidx.compose.material.icons.outlined.Security
 import androidx.compose.material.icons.outlined.Storage
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.HorizontalDivider
+import androidx.compose.material3.Divider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
@@ -33,6 +32,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 
 private data class SettingsItem(
@@ -48,7 +48,7 @@ private val settingsItems = listOf(
     SettingsItem("Language", "English (US)", Icons.Outlined.Language),
     SettingsItem("Privacy", "Data and permissions", Icons.Outlined.Security),
     SettingsItem("Storage", "Manage app data", Icons.Outlined.Storage),
-    SettingsItem("Help", "FAQ and support", Icons.AutoMirrored.Outlined.HelpOutline),
+    SettingsItem("Help", "FAQ and support", Icons.Outlined.HelpOutline),
     SettingsItem("About", "Version 1.0.0", Icons.Outlined.Info),
 )
 
@@ -79,7 +79,7 @@ fun ProfileScreen() {
                     .fillMaxWidth()
                     .padding(horizontal = 20.dp),
                 colors = CardDefaults.cardColors(
-                    containerColor = MaterialTheme.colorScheme.surfaceContainer
+                    containerColor = MaterialTheme.colorScheme.surfaceVariant
                 ),
                 shape = MaterialTheme.shapes.large
             ) {
@@ -87,7 +87,7 @@ fun ProfileScreen() {
                     settingsItems.forEachIndexed { index, item ->
                         SettingsRow(item)
                         if (index < settingsItems.lastIndex) {
-                            HorizontalDivider(
+                            Divider(
                                 modifier = Modifier.padding(start = 56.dp),
                                 color = MaterialTheme.colorScheme.outlineVariant
                             )
@@ -107,7 +107,7 @@ fun ProfileScreen() {
                     .fillMaxWidth()
                     .padding(horizontal = 20.dp)
                     .padding(bottom = 16.dp),
-                textAlign = androidx.compose.ui.text.style.TextAlign.Center
+                textAlign = TextAlign.Center
             )
         }
     }
