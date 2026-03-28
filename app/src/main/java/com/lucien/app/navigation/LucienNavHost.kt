@@ -13,6 +13,7 @@ import com.lucien.app.ui.screens.ActivityScreen
 import com.lucien.app.ui.screens.ExploreScreen
 import com.lucien.app.ui.screens.HomeScreen
 import com.lucien.app.ui.screens.ProfileScreen
+import com.lucien.app.ui.screens.notepad.NotepadScreen
 
 @Composable
 fun LucienNavHost(
@@ -46,13 +47,16 @@ fun LucienNavHost(
             HomeScreen()
         }
         composable("explore") {
-            ExploreScreen()
+            ExploreScreen(onOpenNotepad = { navController.navigate("notepad") })
         }
         composable("activity") {
             ActivityScreen()
         }
         composable("profile") {
             ProfileScreen()
+        }
+        composable("notepad") {
+            NotepadScreen(onBack = { navController.popBackStack() })
         }
     }
 }
