@@ -35,6 +35,18 @@ jobs:
           restore-keys: |
             gradle-${{ runner.os }}-
 
+      - name: Auto-increment versionCode
+        run: |
+          CURRENT=$(grep 'versionCode' app/build.gradle.kts | head -1 | tr -dc '0-9')
+          NEXT=$((CURRENT + 1))
+          sed -i "s/versionCode = $CURRENT/versionCode = $NEXT/" app/build.gradle.kts
+          # Derive versionName from versionCode: major.minor.patch
+          MAJOR=$((NEXT / 10000))
+          MINOR=$(( (NEXT % 10000) / 100 ))
+          PATCH=$((NEXT % 100))
+          sed -i "s/versionName = \".*\"/versionName = \"$MAJOR.$MINOR.$PATCH\"/" app/build.gradle.kts
+          echo "Version bumped: $CURRENT -> $NEXT ($MAJOR.$MINOR.$PATCH)"
+
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
 
@@ -80,6 +92,17 @@ jobs:
             --title "Latest Debug Build" \
             --notes "Debug APK from commit ${{ github.sha }} on branch ${{ github.ref_name }}." \
             --prerelease
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Commit version bump
+        if: github.event_name == 'push'
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add app/build.gradle.kts
+          git commit -m "ci: bump versionCode to $(grep 'versionCode' app/build.gradle.kts | head -1 | tr -dc '0-9') [skip ci]"
+          git push
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
