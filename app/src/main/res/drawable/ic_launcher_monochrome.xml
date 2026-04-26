@@ -5,78 +5,72 @@
     android:viewportWidth="108"
     android:viewportHeight="108">
 
-    <!-- 12-ray sunburst centered at (54,54). Even-indexed rays are long (stroke 4, r 16->30); odd are short (stroke 3, r 16->24). -->
-
     <!-- Long rays -->
     <path
         android:pathData="M70,54 L84,54"
-        android:strokeColor="#FFF8E7"
+        android:strokeColor="#FFFFFF"
         android:strokeWidth="4"
         android:strokeLineCap="round" />
     <path
         android:pathData="M62,67.856 L69,79.981"
-        android:strokeColor="#FFF8E7"
+        android:strokeColor="#FFFFFF"
         android:strokeWidth="4"
         android:strokeLineCap="round" />
     <path
         android:pathData="M46,67.856 L39,79.981"
-        android:strokeColor="#FFF8E7"
+        android:strokeColor="#FFFFFF"
         android:strokeWidth="4"
         android:strokeLineCap="round" />
     <path
         android:pathData="M38,54 L24,54"
-        android:strokeColor="#FFF8E7"
+        android:strokeColor="#FFFFFF"
         android:strokeWidth="4"
         android:strokeLineCap="round" />
     <path
         android:pathData="M46,40.144 L39,28.019"
-        android:strokeColor="#FFF8E7"
+        android:strokeColor="#FFFFFF"
         android:strokeWidth="4"
         android:strokeLineCap="round" />
     <path
         android:pathData="M62,40.144 L69,28.019"
-        android:strokeColor="#FFF8E7"
+        android:strokeColor="#FFFFFF"
         android:strokeWidth="4"
         android:strokeLineCap="round" />
 
     <!-- Short rays -->
     <path
         android:pathData="M67.856,62 L74.785,66"
-        android:strokeColor="#FFF8E7"
+        android:strokeColor="#FFFFFF"
         android:strokeWidth="3"
         android:strokeLineCap="round" />
     <path
         android:pathData="M54,70 L54,78"
-        android:strokeColor="#FFF8E7"
+        android:strokeColor="#FFFFFF"
         android:strokeWidth="3"
         android:strokeLineCap="round" />
     <path
         android:pathData="M40.144,62 L33.215,66"
-        android:strokeColor="#FFF8E7"
+        android:strokeColor="#FFFFFF"
         android:strokeWidth="3"
         android:strokeLineCap="round" />
     <path
         android:pathData="M40.144,46 L33.215,42"
-        android:strokeColor="#FFF8E7"
+        android:strokeColor="#FFFFFF"
         android:strokeWidth="3"
         android:strokeLineCap="round" />
     <path
         android:pathData="M54,38 L54,30"
-        android:strokeColor="#FFF8E7"
+        android:strokeColor="#FFFFFF"
         android:strokeWidth="3"
         android:strokeLineCap="round" />
     <path
         android:pathData="M67.856,46 L74.785,42"
-        android:strokeColor="#FFF8E7"
+        android:strokeColor="#FFFFFF"
         android:strokeWidth="3"
         android:strokeLineCap="round" />
 
-    <!-- Cream center disc, r=11 at (54,54) -->
+    <!-- Center disc r=11 at (54,54) -->
     <path
-        android:fillColor="#FFF8E7"
+        android:fillColor="#FFFFFF"
         android:pathData="M54,43 a11,11 0 1,0 0,22 a11,11 0 1,0 0,-22 z" />
-    <!-- Amber inner disc, r=6 at (54,54) -->
-    <path
-        android:fillColor="#FFD27A"
-        android:pathData="M54,48 a6,6 0 1,0 0,12 a6,6 0 1,0 0,-12 z" />
 </vector>
