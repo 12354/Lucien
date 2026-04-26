@@ -5,10 +5,12 @@ import androidx.compose.material.icons.filled.Explore
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Notifications
 import androidx.compose.material.icons.filled.Person
+import androidx.compose.material.icons.filled.Wc
 import androidx.compose.material.icons.outlined.Explore
 import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material.icons.outlined.Notifications
 import androidx.compose.material.icons.outlined.Person
+import androidx.compose.material.icons.outlined.Wc
 import androidx.compose.ui.graphics.vector.ImageVector
 
 sealed class Screen(
@@ -45,7 +47,14 @@ sealed class Screen(
         unselectedIcon = Icons.Outlined.Person
     )
 
+    data object PoopLogger : Screen(
+        route = "poop_logger",
+        label = "Poop Log",
+        selectedIcon = Icons.Filled.Wc,
+        unselectedIcon = Icons.Outlined.Wc
+    )
+
     companion object {
-        val bottomNavItems = listOf(Home, Explore, Activity, Profile)
+        val bottomNavItems = listOf(Home, Explore, PoopLogger, Activity, Profile)
     }
 }

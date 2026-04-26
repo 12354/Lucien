@@ -13,6 +13,7 @@ import com.lucien.app.ui.screens.ActivityScreen
 import com.lucien.app.ui.screens.ExploreScreen
 import com.lucien.app.ui.screens.HomeScreen
 import com.lucien.app.ui.screens.ProfileScreen
+import com.lucien.app.ui.screens.poop.PoopLoggerScreen
 
 @Composable
 fun LucienNavHost(
@@ -53,6 +54,9 @@ fun LucienNavHost(
         }
         composable(Screen.Profile.route) {
             ProfileScreen()
+        }
+        composable(Screen.PoopLogger.route) {
+            PoopLoggerScreen()
         }
     }
 }

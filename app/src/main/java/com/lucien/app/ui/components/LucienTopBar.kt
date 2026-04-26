@@ -16,6 +16,7 @@ fun LucienTopBar(currentRoute: String?) {
         Screen.Explore.route -> "Explore"
         Screen.Activity.route -> "Activity"
         Screen.Profile.route -> "Profile"
+        Screen.PoopLogger.route -> "Poop Log"
         else -> "Lucien"
     }
 

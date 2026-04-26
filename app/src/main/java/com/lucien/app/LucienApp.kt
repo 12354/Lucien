@@ -30,7 +30,8 @@ fun LucienApp() {
         Screen.Home.route,
         Screen.Explore.route,
         Screen.Activity.route,
-        Screen.Profile.route
+        Screen.Profile.route,
+        Screen.PoopLogger.route
     )
 
     Scaffold(
