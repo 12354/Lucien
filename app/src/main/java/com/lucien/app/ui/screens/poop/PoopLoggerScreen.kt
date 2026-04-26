@@ -1,3 +1,5 @@
+@file:OptIn(ExperimentalMaterial3Api::class)
+
 package com.lucien.app.ui.screens.poop
 
 import androidx.compose.foundation.background
@@ -555,7 +557,6 @@ private fun SelectedDayPanel(date: LocalDate?, entries: List<PoopLog>) {
 
 // ---------- Log dialog ----------
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 private fun LogPoopSheet(
     onDismiss: () -> Unit,
