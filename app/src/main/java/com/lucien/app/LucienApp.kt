@@ -16,7 +16,7 @@ import com.lucien.app.navigation.Screen
 import com.lucien.app.ui.components.LucienBottomBar
 import com.lucien.app.ui.components.LucienTopBar
 
-private val mainRoutes = setOf("home", "explore", "activity", "profile")
+private val mainRoutes = setOf("home", "explore", "activity", "profile", "poop_logger")
 
 @Composable
 fun LucienApp() {

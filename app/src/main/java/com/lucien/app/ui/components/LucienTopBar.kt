@@ -15,6 +15,7 @@ fun LucienTopBar(currentRoute: String?) {
         "explore" -> "Explore"
         "activity" -> "Activity"
         "profile" -> "Profile"
+        "poop_logger" -> "Poop Log"
         else -> "Lucien"
     }
 

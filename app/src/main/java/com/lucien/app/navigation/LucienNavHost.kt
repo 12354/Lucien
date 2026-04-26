@@ -14,6 +14,7 @@ import com.lucien.app.ui.screens.ExploreScreen
 import com.lucien.app.ui.screens.HomeScreen
 import com.lucien.app.ui.screens.ProfileScreen
 import com.lucien.app.ui.screens.notepad.NotepadScreen
+import com.lucien.app.ui.screens.poop.PoopLoggerScreen
 
 @Composable
 fun LucienNavHost(
@@ -54,6 +55,9 @@ fun LucienNavHost(
         }
         composable("profile") {
             ProfileScreen()
+        }
+        composable("poop_logger") {
+            PoopLoggerScreen()
         }
         composable("notepad") {
             NotepadScreen(onBack = { navController.popBackStack() })
